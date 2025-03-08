@@ -172,8 +172,6 @@ function showDetails(data) {
                         <template #body="{ data }">
                             <div class="flex">
                                 <EyeIcon class="mr-2" @click="showDetails(data)" />
-                                <EditIcon @click="edit(data)" />
-                                <DeleteIcon @click="deleteData(data)" />
                             </div>
                         </template>
                     </Column>
