@@ -1,0 +1,38 @@
+1. composer install
+2. npm install
+3. php artisan migrate
+4. php artisan db:seed
+5. php artisan serve
+6. npm run dev in another terminal
+7. set env copy the entire content from env.example to .env file
+
+
+=> for admin section
+
+    http://127.0.0.1:8000/admin/login 
+          
+          email = admin@mail.com
+          password = 123456
+
+
+=>for customer section
+
+    http://127.0.0.1:8000/login 
+          
+          email = customer@mail.com
+          password = 123456
+
+
+for mail function 
+
+create an account in mailtrap or otherplatforms and give the credentials in env
+
+mailtrap credentials with temp mail 
+
+mail: yecobi7586@payposs.com
+password: Mailtrap@123#
+
+
+
+
+

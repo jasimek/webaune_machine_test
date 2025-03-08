@@ -1,0 +1,40 @@
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    client_max_body_size 600M;
+    client_body_timeout 1000s;
+
+    server_name _;
+
+    root         /opt/app/public;
+    index        index.php;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location ~* \.php$ {
+        if ($uri !~ "^/storage/") {
+            fastcgi_pass qmsfpm:9000;
+        }
+        include         fastcgi_params;
+        fastcgi_param   SCRIPT_FILENAME    $document_root$fastcgi_script_name;
+        fastcgi_param   SCRIPT_NAME        $fastcgi_script_name;
+    }
+
+    pagespeed off;
+    pagespeed FileCachePath "/var/cache/ngx_pagespeed/";
+    pagespeed RewriteLevel CoreFilters;
+
+    pagespeed EnableFilters collapse_whitespace;
+    pagespeed EnableFilters remove_comments;
+    pagespeed EnableFilters rewrite_style_attributes_with_url,rewrite_css,rewrite_images;
+
+    location ~ "\.pagespeed\.([a-z]\.)?[a-z]{2}\.[^.]{10}\.[^.]+" {
+        add_header "" "";
+    }
+
+    location ~ "^/pagespeed_static/" { }
+    location ~ "^/ngx_pagespeed_beacon$" { }
+}
